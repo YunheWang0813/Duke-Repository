@@ -1,0 +1,45 @@
+Danger Log:
+
+01/28: As we have implemented the login and register
+function of our website, with basic userÅfs information. The
+login page requires two fields: username and password. After
+rendering the html file, the password typed by users can be
+seen, (not in the form of *****). This is very dangerous
+because anyone around you when typing the password could
+know your information and steal your account by simply
+remembering your password. Finally we fixed this easily by
+setting the input type as password.
+
+02/02: We found that a man-in-the-middle attack (MITM)
+could bring lots of risk to our web application. It is an attack
+where the attacker secretly relays and possibly alters the
+communication between two parties who believe they are
+directly communicating with each other. The situation is that
+suppose we are using an insecure internet connection to
+browse the web (for example, a public Wi-fi) or if our router is
+configured to communicate using an insecure protocol. This
+is very dangerous because it would lead to malicious
+attackers trying to steal our login information, passwords etc.
+The easiest way to solve this problem is that when sending
+sensitive information a website should always use a secure
+protocol such as HTTPS. In this way, hackers interrupting the
+communication could only see the encrypted information that
+they can do nothing to decrypt.
+
+02/04: We found that generally speaking if a user placed his/
+her order very frequently (for example, over 1000 times), it will
+lead the DDoS attack (distributed denial-of-service). This is
+because a hacker can bring down your website by
+overwhelming it with a very large amount of data. If one
+hacker is doing DDoS attack, I.e., send thousands of data
+continuously, along with normal users making request, it will
+be tough to sort out which data is malicious and which is
+legitimate. This is very dangerous not only because the user
+information will be stolen, but the hacker might kidnap the
+rider if he/she becomes the ÅgdriverÅh. We think we can add
+some DDoS protection technique to prevent it happening.
+
+Conclusion on this project: we have learned a lot while
+implementing this Ride Sharing Service web application. We
+really appreciate this opportunity to build up web
+development skills.

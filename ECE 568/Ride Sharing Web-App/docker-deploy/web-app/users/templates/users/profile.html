@@ -1,0 +1,29 @@
+{% extends "rider/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="content-section">
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <p>Current Profile:</p>
+        <ul>
+            <li>Username: {{ user.username }}</li>
+            <li>Username: {{ user.email }}</li>
+            <li>Car_type: {{ user.profile.car_type }}</li>
+            <li>License: {{ user.profile.license }}</li>
+            <li>Max_pass: {{ user.profile.max_pass }}</li>
+        </ul>
+        <p></p>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Update</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends "rider/base.html" %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+              <!--<a class="mr-2" href="#">{{ object.owner }}</a>-->
+              <!--<small class="text-muted">{{ object.arrival|date:"m/d/Y, h:i a" }}</small>-->
+                <h3> Ride Detail </h3>
+                <h5><span style="color:#008b8b">Status: <strong>{{ object.status }}</strong></span></h5>
+                {% if object.owner == user and object.status == 'open' %}
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'rider-owner-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'rider-owner-delete' object.id %}">Delete</a>
+                {% endif %}
+            </div>
+            <h4 class="article-content">Owner: <strong>{{ object.owner }}</strong></h4>
+            {% if object.driver %}
+            <h4 class="article-content">Driver: <strong>{{ object.driver }}</strong></h4>
+            <h6 class="article-content">Car Type: <strong>{{ object.driver.profile.car_type }}</strong></h6>
+            <h6 class="article-content">Car Plate Number: <strong>{{ object.driver.profile.license }}</strong></h6>
+            {% endif %}
+            <h4 class="article-content">Destination: <strong>{{ object.address }}</strong></h4>
+            <h4 class="article-content">Arrival Time: <strong>{{ object.arrival|date:"m/d/Y, h:i a" }}</strong></h4></h4>
+            <h4 class="article-content">Number of Passengers: <strong>{{ object.num_pass }}</strong></h4>
+            <h4 class="article-content">Is Sharer Allowed: <strong>{{ object.CanShare }}</strong></h4>
+            {% if object.CanShare %}
+            <h4 class="article-content"><span style="color:rebeccapurple">List of Sharer:</span></h4>
+                {% for s in object.sharer.all %}
+                    <h4 class="article-content"><strong>　　{{ s.username }}</strong></h4>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </article>
+{% endblock content %}

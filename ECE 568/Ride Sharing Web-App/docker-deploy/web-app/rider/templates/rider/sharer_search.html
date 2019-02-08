@@ -1,0 +1,31 @@
+{% extends "rider/base.html" %}
+{% load bootstrap %}
+{% block title %}Ride Search{% endblock title %}}
+{% block content %}
+
+<div class="container">
+
+<form method="GET">
+    {{ filter.form|bootstrap }}
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+    {% for ride in filter.qs %}
+        {% if ride.status == 'open' and not user in ride.sharer.all and not user == ride.owner and ride.CanShare %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+                <span class="mr-2" style="color:cornflowerblue">{{ ride.owner }}</span>
+                <span class="text-muted">{{ ride.arrival|date:"m/d/Y, h:i a" }}</span>
+                <span style="color:darkmagenta">/{{ ride.status }}</span>
+                <span class="text-muted">/passenger:<strong>{{ ride.num_pass }}</strong></span>
+            </div>
+            <h2><a class="article-title" href="{% url 'sharer-join' ride.id %}">{{ ride.address }}</a></h2>
+          </div>
+        </article>
+        {% endif %}
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

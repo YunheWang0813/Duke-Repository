@@ -1,0 +1,20 @@
+{% extends "rider/base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <h1> {{user.username}}, welcome to Rider! </h1>
+    {% else %}
+    <h1> Welcome to Rider! </h1>
+    {% endif %}
+    <!--<br>-->
+    <!--{% for ride in rides %}-->
+        <!--<article class="media content-section">-->
+          <!--<div class="media-body">-->
+            <!--<div class="article-metadata">-->
+              <!--<a class="mr-2" href="#">{{ ride.owner }}</a>-->
+              <!--<small class="text-muted">{{ ride.arrival|date:"m/d/Y, h:i a" }}</small>-->
+            <!--</div>-->
+            <!--<h2><a class="article-title" href="{% url 'rider-owner-status' ride.id %}">{{ ride.address }}</a></h2>-->
+          <!--</div>-->
+        <!--</article>-->
+    <!--{% endfor %}-->
+{% endblock content %}

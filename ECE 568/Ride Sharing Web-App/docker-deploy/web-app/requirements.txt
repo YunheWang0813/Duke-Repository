@@ -1,0 +1,5 @@
+Django>=2.0,<3.0
+psycopg2
+django-bootstrap-form
+django-crispy-forms
+django-filter

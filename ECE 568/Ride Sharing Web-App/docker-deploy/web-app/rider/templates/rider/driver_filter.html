@@ -1,0 +1,19 @@
+{% extends "rider/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% for ride in rides %}
+        {% if ride.owner != user and ride.status == 'open' and ride.num_pass <= user.profile.max_pass %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+                <span class="mr-2" style="color:cornflowerblue">{{ ride.owner }}</span>
+                <span class="text-muted">{{ ride.arrival|date:"m/d/Y, h:i a" }}</span>
+                <span style="color:darkmagenta">/{{ ride.status }}</span>
+                <span class="text-muted">/passenger:<strong>{{ ride.num_pass }}</strong></span>
+            </div>
+            <h2><a class="article-title" href="{% url 'rider-driver-status' ride.id %}">{{ ride.address }}</a></h2>
+          </div>
+        </article>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
