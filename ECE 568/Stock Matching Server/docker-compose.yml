@@ -1,0 +1,29 @@
+version: '2'
+services:
+  db:
+      image: postgres
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: passw0rd
+        POSTGRES_DB: stockdb
+      restart: always
+      expose:
+        - "5432"
+      ports:
+        - "54321:5432"
+
+  web:
+      build: ./stock_matching_server
+      command: bash -c "./server"
+      #environment:
+      #  - PGHOST=db
+      #  - PGUSER=postgres
+      #volumes:
+      #  - ./stock_matching_server:/code
+      expose:
+        - "12345"
+      ports:
+        - "12345:12345"
+      depends_on:
+        - db
+      tty: true

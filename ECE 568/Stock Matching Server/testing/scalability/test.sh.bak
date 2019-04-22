@@ -1,0 +1,18 @@
+#! /bin/bash
+
+HOST=vcm-7703
+NUM=40
+
+./client1 $HOST &
+start=$(date +"%T")
+
+for ((i = 0; i < $NUM; i++))
+do
+	./client2 $HOST &
+	./client3 $HOST &
+done
+
+end=$(date +"%T")
+runtime=$(echo "$end - $start")
+echo "runtime: $runtime"
+#wait

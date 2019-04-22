@@ -1,0 +1,28 @@
+Danger Log:
+This document identifies potential dangers may occur through the proxy. There are 3 main source of dangers: client, proxy and server.
+
+Client:
+1. Methods other than "GET", "POST", "CONNECT":
+The proxy can only handle “GET”, “POST”, “CONNECT”, so if other method is specified (e.g. “PATCH”), the proxy will send 400 bad request to the client and server won’t receive the request.
+2. Different protocols are used:
+This is a HTTP proxy, so if a user specifies different protocols (e.g. “FTP”), the proxy will send 400 bad request to the client. Additionally, if a user specifies HTTP protocols other then 1.0/1.1, it will also send 400 bad request to the client.
+3. URI not specified/ill-formed:
+If URI in request is not included/ill-formed, the proxy will recognize it as a bad request.
+4. Malformed request:
+Malformed requests not mentioned above are all treated as bad requests and won’t send to the server.
+5. Many clients connecting at the same time:
+If there are too many threads exist and the server need to send a lot of data to each clients, it is very likely the proxy cannot work correctly. 
+6. Browsers:
+We used Firefox browser for testing the work of proxy, but not sure of using other browsers (e.g. Google Chrome).
+
+Proxy:
+1. Cache size:
+When fetching a large data, it may overflow the maximum cache size. Therefore, we have the method to ensure the size can be properly handled.
+2. Headers:
+The cache cannot handle some headers. Specifically, “Cache-Control”, “ETag”, “If-None-Match”, “Last-Modified” are able to affect the cache, but header like “Vary” cannot affect the Cache and is simply ignored. 
+3. Cache-Control header:
+Some of directives in Cache-Control header cannot be handle. Specifically, only “max-age”, “no-cache”, “no-store” in request and “must-revalidate”, “no-cache”, “no-store”, “max-age”, “s-maxage” in response can be handled.
+
+Server:
+1. Server may not send data back to proxy, and the server may send weird data to the proxy.
+2. Server don’t send header as content length and transfer-encoding, then the proxy may be blocked.

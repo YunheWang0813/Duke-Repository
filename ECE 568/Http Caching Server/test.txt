@@ -1,0 +1,29 @@
+Instructions:
+Start the program: make ./proxy, and use Firefox for testing. Port is 12345.
+
+Test Cases:
+GET:
+test Content-length receiving  :
+    http://rabihyounes.com/awesome.txt
+    detectportal.firefox.com/success.txt
+    http://people.duke.edu/~bmr23/ece568/ 
+    http://rabihyounes.com/ 
+    
+test Chunked receiving:
+    http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx
+    
+    
+POST: 
+    http://www.csm-testcenter.org/test?do=show&subdo=common&test=file_upload (By choosing uploading Files in http)
+    http://vcm-8631.vm.duke.edu:8000/catalog/signup/ (HW1 - ride sharing system)
+
+CONNECT:
+    https://www.google.com/ (By searching)
+    https://www.youtube.com
+
+Bad Request:
+http://www.4523632531512.com/ 
+
+
+We also write some GET requests in regarding with cache and do some basic browsing operation and test it.
+

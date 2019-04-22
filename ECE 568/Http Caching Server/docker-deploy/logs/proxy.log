@@ -1,0 +1,28 @@
+0 : not in cache
+0: Received "HTTP/1.1 200 OK" from rabihyounes.com
+0: Responding "HTTP/1.1 200 OK"
+1 : not in cache
+1: Received "HTTP/1.1 200 OK" from coolaf.com
+1: Responding "HTTP/1.1 200 OK"
+4 : not in cache
+4: Received "HTTP/1.1 301 Moved Permanently" from ouapi.com
+5: Received "HTTP/1.1 200 OK" from coolaf.com
+5: Responding "HTTP/1.1 200 OK"
+28: Received "HTTP/1.1 200 OK" from ocsp2.globalsign.com
+28: Responding "HTTP/1.1 200 OK"
+23: Received "HTTP/1.1 200 OK" from ocsp.godaddy.com
+23: Responding "HTTP/1.1 200 OK"
+31: Received "HTTP/1.1 200 OK" from ocsp2.globalsign.com
+31: Responding "HTTP/1.1 200 OK"
+45: Received "HTTP/1.1 200 OK" from ocsp.comodoca.com
+45: Responding "HTTP/1.1 200 OK"
+43: Received "HTTP/1.1 200 OK" from ocsp.godaddy.com
+43: Responding "HTTP/1.1 200 OK"
+48: Received "HTTP/1.1 200 OK" from ocsp.comodoca.com
+48: Responding "HTTP/1.1 200 OK"
+54: Received "HTTP/1.1 200 OK" from ocsp.godaddy.com
+54: Responding "HTTP/1.1 200 OK"
+53: Received "MÆc¿Í’~Þ,ß9jì@+5µ)Õu'ß?`>,D„!ç2-FP7>9öáAYºAXã©¯¯£(&t®ü“‹ÁÖ¾f6*`kJ?Á÷RF¡ÌÄ:ëá}DìÈ9·öm·‹>ý°C"âÞ‘yiJ4Œ©S²tV?ÄßŠ4ú-’±!É"‡SPÒ@n¶*ßëphçãˆ~Ðn¿qŒ -eg6¬ "²ÛbtÖÃºØba®Žÿ©bnzv#@7ã¡_ä2¿ó×IóË=œ-Öb!HØ" from pixel.adsafeprotected.com
+64: Received "'L›Dü`5wåœià­žš¹žæZ´|LØjHkmgIÑÞêýV×ÈU7Y§T‡â.u[¢-Q4k%uøfL¶$ô²J¯QNM2Ôù4Mørœ}D*x.†ÝÓ2œÝ%ÍGÅ¿«V;CÈ$ÂÎorÃí´Ä“,
+M`íÐ$ê˜½J/#5Ÿ~¦—–¢Ð¼˜58W4»@è/9 cÃý×v/Œ
+Ójµsfûr~açë-`ç¼˜XÿX’Ô¡2ŸxB,Í6=QE3ëxùÈ[ÿ…ö>Gy2YƒŠ_ôû‘FÛnËðeÍÑ$}@Þå°ß–Ç¨jëw¤ßìž‚q,²“Þ^©ÅyQ Ù	ß“ÇÝ³=ªSr©`ÞP¹šôã=ßìTÆ2Àÿv“2™1ÏJâ!c-›ÖÔ"RdåàGY?»Í§­žG8²z¤LÍ´.<AFa}u[" from imasdk.googleapis.com

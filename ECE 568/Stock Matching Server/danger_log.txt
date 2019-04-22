@@ -1,0 +1,46 @@
+﻿Danger Log:
+3/22: Database table should be dropped in the correct order, otherwise it cannot be dropped because of foreign key restriction. Specifically need to be in the order of: CANCELED -> EXECUTED -> OPEN -> TRANSACTION -> SYM -> ACCOUNT
+
+
+3/23: Sent and received data buffer cannot be too small to not hold the required data. we changed buffer size from 1000 to 50000 to ensure the required data can be sent and received.
+
+
+3/24: Found xml parser libraries as rapidxml and libxml2 have serious memory leak problem, we used Tinyxml2 instead to mitigate the bad effect.
+
+
+3/25: Segmentation fault occurs if we select the empty query. Fixed.
+
+
+3/27: Xml format need to strictly follow the rule we defined for the system, otherwise it may cause errors as segmentation fault, assertion fail. It need to start with a XML declaration as <?xml version="1.0" encoding="UTF-8"?>. The next line should be <create> or <transactions>.
+
+
+<create>: 
+// create an account
+   <account id="(int)" balance="(double)"/>
+// create a symbol
+   <symbol sym="(string)">
+   // one or more
+      <account id="(int)">(int)</account>
+      ...
+   </symbol>
+   ...
+</create>
+
+
+<transactions id=”(int)”>:
+// create an order
+    <order sym=”(string)” amount=”(int)” limit=”(double)”/>
+// query a transaction
+    <query id=”(int)”/>
+// cancel an open order in the transaction
+    <cancel id=”(int)”/>
+</transactions>
+
+
+4/1: The program cannot run successfully on multiple threads by our program, so we introduce the threadpool.h from https://github.com/progschj/ThreadPool to realize the function of threadpool.
+
+
+4/1: Bash script of scalability testing doesn’t work before the concurrency setup. After that, it can be used to test the test and record the time.
+
+
+4/3: If we set too many worker threads, there will be socket accept problems. Fixed.
