@@ -1,0 +1,6 @@
+1. C-x C-f (find buffer)
+(2. C-x C-b (buffer list))
+3. C-x 3 (cut half)
+4. C-x b (switch buffer)
+5. C-x 0 (close buffer)
+(6. C-x o (move cursor))

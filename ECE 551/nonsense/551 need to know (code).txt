@@ -1,0 +1,31 @@
+string: substr, insert, empty, 
+
+vector: sort, clear, resize, 
+
+iterator: find
+
+(unordered) map: 
+
+set
+
+list
+
+#other: cin, stringstream, getline, ifstream, perror, cerr
+
+pointer
+
+include <library>
+
+look midterm exam...
+
+pictures in AoP!!!!!!! (linked list, ...)
+
+Makefile (094)
+
+Tips: important: delete, 
+
+
+
+
+
+### hash func/table, huffman, 

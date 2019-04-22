@@ -1,0 +1,3 @@
+http://www.cplusplus.com/reference/vector/vector/erase/
+http://www.cplusplus.com/reference/string/string/find/
+http://www.cplusplus.com/reference/string/string/pop_back/

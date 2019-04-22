@@ -1,0 +1,36 @@
+set aaa d
+set bbb e
+set ccc f
+echo $aaa (d)
+echo $aaa- (d-)
+echo $aaa$bbb (de)
+echo $aaa$bbb-a+$ccc (de-a+f)
+echo $aaa$bbb-a+$ccc^thing (de-a+f^thing)
+echo $aaaa ()
+echo $aaa$bbb$cccc (de)
+echo $aaa$bbbb$ccc (df)
+
+
+
+(only space in command line)
+(only . in command line)
+(only / in command line)
+(only ./ in command line)
+(only \ in command line)
+
+
+
+
+Redirect:
+date > a > d  #too hard...
+date > >
+date >    a
+
+I need the strict form of:
+argv[0] argv[1] argv[2] > file (need to be separated by spaces) 
+
+
+
+ls -l > test2.txt
+cat aaa 2> test3.txt
+wc -l < test2.txt  

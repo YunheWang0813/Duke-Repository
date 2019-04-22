@@ -1,0 +1,250 @@
+./myshell: My command shell
+./test_step2: A helper program: output all arguments inputted in
+
+Step1:
+(1) Run [exit]
+    You will see that the shell exit. Note that you need to exactly type "exit"
+    for exiting the shell, otherwise the shell would take it as a nonexist command.
+	
+(2) Run [Ctrl+D] (EOF)
+    You will see that the shell exit. 
+	
+(3) Run [exit 12345]
+OUTPUT: Command exit not found
+    You will see that you can not exit the shell, because you didn't type exactly "exit".
+	
+(4) Run []
+    You will see that nothing happen and shell continue, because you didn't type any command
+
+(5) Run [         ]
+    You will see that nothing happen and shell continue, because you didn't type anything except for space
+
+(6) Run [.myShell]
+        [Ctrl+D]
+	[Ctrl+D]
+    You will see you exit the shell after 2 exit operation
+
+Step2:
+(1) Run [env]
+    You will see that env command is executed and all environment variables shown, because 
+    the shell searches every PATH in ECE551PATH and check if the file exist, and env is existed
+    in /usr/bin so it can be executed. Also, you will notice that there is a environment variable
+    ECE551PATH which have the same content as PATH.
+
+(2) Run [echo $ECE551PATH]
+OUTPUT: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+    You will see a string of colon-delimited list of paths, specifically,
+
+(3) Run [                ls]
+    You will see that ls command can be run normally even there are spaces.
+
+(4) Run [c a t Makefile]
+OUTPUT: Command c not found
+    The shell only recognize first string before encountering a space character 
+
+(5) Run [ls -l]
+    You will see that ls -l command can be run normally as it in the system shell.
+
+(6) Run [ls -abcde]
+OUTPUT: ls: invalid option -- 'e'
+        Try 'ls --help' for more information.
+        Program exited with status 2
+which is the same output as system shell
+
+(7) Run [la]
+OUTPUT: Command la not found
+    la file is not in the paths contained in ECE551PATH, so the command cannot be found
+
+(8) Run [/bin/ls/]
+OUTPUT: Path /bin/ls/ not found
+    Since there is '/' for the first of string, it takes the command as a path. However, no ls/
+program in /bin directory.    
+
+(9) Run [/bin/ls -l]
+    You will see that the output is the same as command: ls -l
+
+(10) Run [test_step2]
+OUTPUT: Command test_step2 not found
+    test_step2 is not on the path specified in ECE551PATH, so it cannot be found 
+
+(11) Run [./aaa]
+OUTPUT: Path ./aaa not found
+    Program aaa is not at the current directory, so the path cannot be found
+	
+(12) Run [./test_step2 a b 23]
+OUTPUT: argv[1] = a,
+        argv[2] = b,
+        argv[3] = 23,
+    Program correctly output the arguments separated by single spaces
+    
+(13) Run [./test_step2       a               b    23]
+OUTPUT: argv[1] = a,
+        argv[2] = b,
+        argv[3] = 23,
+    Program correctly output the arguments separated by multiple spaces
+
+(14) Run [        ./test_step2 a b 23]
+OUTPUT: argv[1] = a,
+        argv[2] = b,
+        argv[3] = 23,
+    Program correctly output the arguments even there is a big space before actual command
+
+(15) Run [./test_step2  a\ b c\ \ d]
+OUTPUT: argv[1] = a b,
+        argv[2] = c  d,
+    "\ " in the argument should be replaced with " ", so "a\ b" -> "a b", "c\ \ d" -> "c  d"
+
+(16) Run [./test_step2 a\  b c \ d]
+OUTPUT: argv[1] = a ,
+	argv[2] = b,
+	argv[3] = c,
+	argv[4] =  d,
+    It seems like (15), but a, b, c, d are all separated by space.
+    "a\ " -> a, "\ d" -> " d"
+
+(18) Run [./test_step2 a\ b\ c\ d\ ] 
+OUTPUT: argv[1] = a b c d ,
+    all are connected by "\ " -> " "
+
+Step3:
+
+(1) Run [cd]
+OUTPUT: error: arguments number incorrect.
+    Obviously, no directory is specified, error.
+
+(2) Run [cd /home]
+    You will see that you are now in /home path, because cd command and
+    /home path make the change of directory
+
+(3) Run [cd home]
+OUTPUT: error: No such file or directory.
+    Should be /home, the directory
+
+(4) Run [..]
+    You will see that you are in /home/userID/ece551$ directory
+    which perform the same task in system shell
+
+(5) Run [cd /aaa]
+OUTPUT: error: No such file or directory.
+    Even with '/', if there is no directory, task cannot be performed
+
+(6) Run [set aaa d]
+	[echo $aaa]
+OUTPUT: d
+    $aaa is replaced with its value: d
+	   
+(7) Run [set aaa hello world]
+        [echo $aaa]
+OUTPUT: hello world
+    In set operation, string after var is all stored,
+    even with spaces.
+	   
+(8) Run [set aaa       hello world]
+       [echo $aaa]
+OUTPUT:       hello world
+    In my shell, string is set after one space.
+	   
+(9) Run [set aaa d]
+        [echo $aaa] //d
+        [set aaa e]
+        [echo $aaa] //e
+    If the key is already contained in the own map
+    update it with the new value.
+	   
+(10) Run [set aaa d]
+         [set bbb e]
+         [echo $aaa$bbb]
+OUTPUT: de
+    If $ expressions are connected, they will be replaced if
+    valiables were set.
+	   
+(11) Run [set aaa d]
+         [set bbb e]
+         [echo $aaa-$bbb+]
+OUTPUT: d-e+
+    If special characters (-, +, ^...) follows immediately,
+    simply unchange them and output.
+	   
+(12) Run [set aaa d]
+         [set bbb e]
+         [set ccc f]
+         [echo $aaa$bbb+-$ccc^thing]
+OUTPUT: de+=f^thing
+    After special character, it simply output until
+    encounter '$' again
+	   
+(13) Run [set aaa ls]
+         [$aaa]
+    You will see that ls operation is performed,
+    because it is just replaced
+	   
+(14) Run [set aaa ./test_step2]
+         [set bbb e]
+	 [set ccc f]
+         [$aaa $bbb $ccc]
+OUTPUT: argv[1] = e,
+	argv[2] = f,
+    with ./ it can still run
+	   
+(15) Run [set ECE551PATH /usr/bin]
+         [export ECE551PATH]
+         [env]
+         [ls]
+    You will see that env can be executed but ls cannot.
+    It is because ECE551PATH is changed to /usr/bin and env
+    can be found there while ls is not there
+	   
+(16) Run [set v hello]
+         [inc v]  //1
+	 [inc v]  //2
+    inc make non-number string to be "1", and consective
+    inc make it to be "2"
+	   
+(17) Run [set v -3]
+         [inc v] //-2
+	 [inv v] //-1
+	 [inc v] //0
+	 [inc v] //1
+	 [inc v] //2
+    inc can handle negative integer, -1 to 0 incrementation
+
+(18) Run [inc v]
+         [set v ls]
+         [$v]
+    You will see ls operation. set changes v to be ls
+
+Step4:
+(1) Run [ls -l > test0.txt]
+        [cat test0.txt]
+    You will see nothing on the shell output, instead, the
+    output is in test0.txt, which is created by the command
+
+(2) Run [ls -l > test1.txt]
+        [sort -r < test1.txt]
+    Firstly, ls -l output is outputted into test1.txt
+    Then, sort -r is performed based on the test1.txt
+    input, which is just created.
+	   
+(3) Run [cat aaa 2> test2.txt]
+    You will see the error message outputted in test2.txt
+
+(4) Run [cat aaa > test.txt]
+OUTPUT: cat: aaa: No such file or directory
+    It is not 2>, so just output on shell
+
+(5) Run [ls -l > test0.txt test1.txt]
+OUTPUT: Wrong redirection operation!
+    Invalid because 2 or more file are included
+
+(6) Run [ls -l < test.txt]
+    You will see the output of command ls -l, and
+    test.txt is no meaning because input of it is
+    unnecessary
+
+(7) Run [sort -r < ls -l]
+OUTPUT: Wrong redirection operation!
+    ls -l here cannot substitute (2)
+
+(8) Run [ls -l > aaa]
+    You will see the output of ls -l in aaa file,
+    so no need to be the form ".txt"

@@ -1,0 +1,11 @@
+1. Valgrind memory leak
+
+getenv /home/yw314/ece551/mp_miniproject
+getenv /home/yw314/ece551/mp_miniproject/
+./getenv (o)
+
+
+execution.cpp execution.h
+variable.cpp variable.h
+myShell.cpp myShell.h
+
