@@ -1,0 +1,5 @@
+https://corgi-lab.com/programming/c-lang/http-server-clang/
+https://docs.microsoft.com/en-us/windows/desktop/winsock/sockaddr-2
+https://paginas.fe.up.pt/~aas/pub/Aulas/LAS/Ano05_06/Slides/sockets_exs.pdf
+https://www.geeksforgeeks.org/udp-server-client-implementation-c/
+http://bttb.s1.valueserver.jp/wordpress/blog/2018/06/26/network1/
