@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <h3>Order History</h3>
+   {% for order in orders %}
+        {% if user.id == order.user_id_id %}
+        <article class="media content-section">
+          <div class="media-body">
+              <p class="article-content"><b>Item:</b> {{ order.item_id.name }}</p>
+              <p class="article-content"><b>Quantity:</b> {{ order.bought_quantity }}</p>
+              <p class="article-content"><b>Delivery Location:</b> ({{ order.x }}, {{ order.y }})</p>
+              {% if order.status == 'delivered' %}
+              <p class="article-content"><span style="color:blue"><b>Status:</b> {{ order.status }}</span></p>
+              {% else %}
+              <p class="article-content"><b>Status:</b> {{ order.status }}</p>
+              {% endif %}
+              {% if order.truck_id %}
+              <p class="article-content"><b>Truck ID:</b> {{ order.truck_id }}</p>
+              {% else %}
+              <p class="article-content"><b>Truck ID:</b> <span style="color:red">No truck assigned yet</span></p>
+              {% endif %}
+              <p class="article-content"><b>Created Time:</b> {{ order.time_created }}</p>
+          </div>
+        </article>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

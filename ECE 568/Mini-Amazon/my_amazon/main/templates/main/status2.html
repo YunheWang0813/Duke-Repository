@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <h3>Fill History</h3>
+   {% for fill in fills %}
+        {% if user.id == fill.user_id_id %}
+        <article class="media content-section">
+          <div class="media-body">
+              <p class="article-content"><b>Item:</b> {{ fill.item_id.name }}</p>
+              <p class="article-content"><b>Quantity:</b> {{ fill.fill_quantity }}</p>
+              <p class="article-content"><b>Created Time:</b> {{ fill.time_created }}</p>
+          </div>
+        </article>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

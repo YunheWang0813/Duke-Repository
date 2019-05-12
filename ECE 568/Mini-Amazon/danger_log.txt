@@ -1,0 +1,35 @@
+4/10:
+When we first trying to connect the world, it keeps sending us "world_id has already exist", After we check the protocol several times again, we find we need to first connect the world without specifying the world_id and when the world sending back the world_id it creates, we need to use this world_id to connect the world again.
+
+4/11:
+When we trying to debug by entering the world_sim database, but never succeed. Then with the help of Tas, we find that we should enter the one with 'postgres' image instead of 'dockerdeploy_server'.Besides, after entering the docker, our username is root, so we don't need to use sudo
+
+4/11:
+After futher discussing with all the IG members, we find we could delete the sequeense number and ACKs parts in the connection between the Amazon and Ups, based on the fact that TCP communication is reliable. 4/23 :Although it sounds like dangerous at first, we now haven't encounter some failure because of lacking seqnum and acks.
+
+4/12:
+When we first send two commands(Aconnect, Aproduct) the world only send"connect success" and an Ack for the aproduct command but no other response for the our "buy". After trying sometimes, we find it is just because the world may need a relatively long time to give us response, and the ack may come first, and the real response will be received by us later.
+
+4/14:
+When connect we UPS for sometimes, we find that it is possible that we get stuck when sending and recving the info at the same time. So we finally decide to use two sockets to communicate. One is only for sending, and the other is only for getting . Then the problem solved.
+
+4/15:
+At first we use a threadpool to do the work concurrently, but we find we do not need so much thread, and we change the structure to four threads. The first one used for connect to world. The second one used for connect with the frontend. The third one used for send command to the ups. The fourth one used for receiving commands from the ups.
+
+4/16:
+When we design the front end we find forms cannot get our parameters. We then use the function .get_clean data(). It works.
+
+4/18:
+For the convenience purpose,  we do not use socket between the frontend and the backend. We designed six status for the order according to our workflow picture, and keep checking the database and select for the order with needed status and do the following development.
+
+4/19:
+s_status: We found that we continuously send Acommands before we receive the actual Aresponses from the world, and the world return error to us. We added a new status called s_status for each order to avoid this situation in topack and load commands. Combine s_status with status can promise that the message is sent correctly. 
+
+4/20:
+buy one deduct two: We found that when we order or fill, the item's quantity saved in our database is multiplied by 2. We found that we updated the database both in frontend returned form and backend sql commmand based on the parsed information returned by the world. We changed the design to only update the database by the returning result of the world and the problem is solved.
+
+4/21:
+So, far, we only consider the situation where world flakeness is 0 which means that the world won't miss any package. We now consider that situation  and adding a set to store the acks returned from the world and since seqnum is global variable, each time its value will increase by one. So we use a while (1) loop and in that loop we first sleep 10 seconds and then send the command to the world. Each time we get the ack from the world, we check if the ack is already in the set. If so, we break the loop. 
+
+4/23:
+a very covert bug, at first we use sql command like "select * from main_order..." then  result=fetchone record. and we assign the value result[i] to some temporary variable. But, we are based on the field order of the class we design using Django. But we find the order of Django class is not the same as it in the database table. So at some point we will always  encounter problem about the info is not correct. After we find the fact, we change the field order, and then the problem solved.

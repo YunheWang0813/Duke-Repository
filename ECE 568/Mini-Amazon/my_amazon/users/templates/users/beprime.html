@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <fieldset class="form-group">
+                        {% if profiles.is_prime is False %}
+                        <legend class="border-bottom mb-4">You are now: <span>Normal User</span></legend>
+                        {% else %}
+                        <legend class="border-bottom mb-4">You are now: <span style="color:goldenrod">Prime User</span></legend>
+                        {% endif %}
+                    </fieldset>
+                    {% if profiles.is_prime is False %}
+                    <button class="btn btn-outline-info" type="submit">Be a Prime User!</button>
+                    {% else %}
+                    <button class="btn btn-outline-info" type="submit">Be a Normal User</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Be a Prime User!</button>
+                </div>
+            </form>
+        </div>
+{% endblock content %}
